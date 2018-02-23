@@ -68,9 +68,9 @@ public:
   {
       int n = a.size() - 1;
       value_type y = a[n];
-      for (size_type w = n - 1; w > 0; w--)
+      for (size_type w = n; w > 0; w--)
       {
-          y = x*y + a[w];
+          y = x*y + a[w - 1];
       }
       return y;
   }

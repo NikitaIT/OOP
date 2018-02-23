@@ -81,7 +81,7 @@ public:
       return NULL;
 
     auto koefs = *this->Koefs;
-    auto a = koefs[0], b = koefs[1], c = koefs[2];
+    auto a = koefs[2], b = koefs[1], c = koefs[0];
 
     if(a == value_type(0))
     {
