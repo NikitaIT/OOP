@@ -5,7 +5,6 @@
 #include <sstream>
 #include <algorithm>
 #include <complex>
-#include "radical.h"
 using namespace std;
 
 typedef double number;
@@ -99,35 +98,6 @@ public:
               ( -1*b + sqrt(discr) ) / (2 * a),
               ( -1*b - sqrt(discr) ) / (2 * a)
         );
-    }
-    if (discr != 0)
-    {
-      /*
-      radical dRoot (discr);
-
-      if (dRoot.isInteger())
-      {
-         return new pair<value_type,value_type>(
-               fraction(-b + sqrt(discr), 2*a).toString() ,
-               fraction(-b - sqrt(discr), 2*a).toString()
-         );
-      }
-      else
-      {
-        std::string rational = fraction(-b, 2*a).toString(),
-                    irrational = fraction(radical(discriminant), 2*a).toString();
-        if (rational == "0")
-          return new pair<value_type,value_type>(
-                irrational ,
-                -irrational
-          );
-        else
-          return new pair<value_type,value_type>(
-                rational +" + " +irrational ,
-                rational +" - " +irrational
-          );
-      }
-      */
     }
     return NULL;
   }

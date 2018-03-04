@@ -55,20 +55,12 @@ complex<double> parse(QString n, bool *ok = 0){
   *ok = ok1 && ok2;
   return *com;
 }
-/*
-double parse(QString n, bool *ok = 0){
-  return n.toDouble(ok);
-}
-*/
 MainWindow::MainWindow(QWidget *parent) :
   QMainWindow(parent),
   ui(new Ui::MainWindow)
 {
   ui->setupUi(this);
   _labels.reserve(3);
-  //auto sd=new QDoubleValidator(-1100, 1100, 4, this);
-  //sd->setLocale(QLocale::Interlingua);
-  //ui->leValue->setValidator( sd );
 
   _polynom.Koefs->push_back(0);
   _polynom.Koefs->push_back(0);

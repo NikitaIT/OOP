@@ -14,11 +14,9 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    polynom.cpp \
-    radical.cpp
+    polynom.cpp
 
 HEADERS  += mainwindow.h \
-    polynom.h \
-    radical.h
+    polynom.h
 
 FORMS    += mainwindow.ui

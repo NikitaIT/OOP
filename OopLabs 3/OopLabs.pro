@@ -13,9 +13,15 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    polynom.cpp \
+    matrix.cpp
 
 HEADERS  += mainwindow.h \
-    polynom.h
+    polynom.h \
+    matrix.h \
+    parse.h \
+    include.h \
+    matriximpl.h
 
 FORMS    += mainwindow.ui
