@@ -17,11 +17,11 @@
 ## Параметризованные классы
 ![Параметризованные классы][ooplab8]
 
-[ooplab1]: https://github.com/NikitaIT/OOP/blob/master/OopLabs%201/Window.png "OopLab 1"
-[ooplab2]: https://github.com/NikitaIT/OOP/blob/master/OopLabs%202/Window.png "OopLab 2"
-[ooplab3]: https://github.com/NikitaIT/OOP/blob/master/OopLabs%203/Window.png "OopLab 3"
-[ooplab4]: https://github.com/NikitaIT/OOP/blob/master/OopLabs%204/Window.png "OopLab 4"
-[ooplab5]: https://github.com/NikitaIT/OOP/blob/master/OopLabs%205/Window.png "OopLab 5"
-[ooplab6]: https://github.com/NikitaIT/OOP/blob/master/OopLabs%206/Window.png "OopLab 6"
-[ooplab7]: https://github.com/NikitaIT/OOP/blob/master/OopLabs%207/Window.png "OopLab 7"
-[ooplab8]: https://github.com/NikitaIT/OOP/blob/master/OopLabs%208/Window.png "OopLab 8"
+[ooplab1]: https://github.com/NikitaIT/OOP/blob/master/OopLab%201/Window.png "OopLab 1"
+[ooplab2]: https://github.com/NikitaIT/OOP/blob/master/OopLab%202/Window.png "OopLab 2"
+[ooplab3]: https://github.com/NikitaIT/OOP/blob/master/OopLab%203/Window.png "OopLab 3"
+[ooplab4]: https://github.com/NikitaIT/OOP/blob/master/OopLab%204/Window.png "OopLab 4"
+[ooplab5]: https://github.com/NikitaIT/OOP/blob/master/OopLab%205/Window.png "OopLab 5"
+[ooplab6]: https://github.com/NikitaIT/OOP/blob/master/OopLab%206/Window.png "OopLab 6"
+[ooplab7]: https://github.com/NikitaIT/OOP/blob/master/OopLab%207/Window.png "OopLab 7"
+[ooplab8]: https://github.com/NikitaIT/OOP/blob/master/OopLab%208/Window.png "OopLab 8"
