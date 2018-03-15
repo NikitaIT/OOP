@@ -5,20 +5,29 @@
 #include "figures.h"
 #include "random.h"
 #include <list>
-
+#include <QtCore/qglobal.h>
+#include <string>
+#include <sstream>
+template<typename T>
+void debug(T t){
+    std::ostringstream buff;
+    buff<< t;
+    qDebug(buff.str().c_str());
+}
 
 class Target : public Rectangle
 {
 public:
     Rectangle target;
-    std::list<Figures> ArrayofFigures;
+    std::list<Figures*> ArrayofFigures;
     Random r;
     Target(){}
     Target(float x, float y, float widht, float height) : Rectangle(x, y, widht, height)
     {
         target = Rectangle(x, y, widht, height);
-        ArrayofFigures = std::list<Figures>();
+        ArrayofFigures = std::list<Figures*>();
         r = *new Random();
+        area = -1;
     }
 
     void GenerateCoordinateonBorder( float &x, float &y)
@@ -48,53 +57,60 @@ public:
         }
     }
     //функция генерации фигур с размерами, распределенными по равномерному закону
-    std::list<Figures> GenerateFigures(int N)
+    std::list<Figures *> GenerateFigures(int N)
     {
-        auto list = *new std::list<Figures>();
+        auto list = *new std::list<Figures*>();
         for (int i = 0; i < N; i++)
         {
-            Figures fig;
+            Figures *fig;
 
             float x, y;
             GenerateCoordinateonBorder(x, y);
-            switch (r.Next(1,5))
+            auto s = r.Next(1,5);
+            switch (s)
             {
-            case 1:
-                fig = *new Rectangle(x, y, r.Next((int)widht/4, (int)widht/2),r.Next((int)height/4, (int) height/2));
-                break;
-            case 2:
-                fig = *new Ellipse(x, y, r.Next((int)widht / 4, (int)widht / 2), r.Next((int)height / 4, (int)height / 2));
-                break;
-            case 3:
-                fig =*new Square(x, y, r.Next((int)widht / 4, (int)widht / 2));
-                break;
-            case 4:
-                fig = *new Circle(x, y, r.Next((int)widht / 4, (int)widht / 2));
-                break;
-            default:
-                break;
+                case 1:
+                    fig = new Rectangle(x, y, r.Next((int)widht/4, (int)widht/2),r.Next((int)height/4, (int) height/2));
+                    break;
+                case 2:
+                    fig = new Ellipse(x, y, r.Next((int)widht / 4, (int)widht / 2), r.Next((int)height / 4, (int)height / 2));
+                    break;
+                case 3:
+                    fig =new Square(x, y, r.Next((int)widht / 4, (int)widht / 2));
+                    break;
+                case 4:
+                    fig = new Circle(x, y, r.Next((int)widht / 4, (int)widht / 2));
+                    break;
+                default:
+                    break;
             }
-               fig.SetCenter(x, y);
+               fig->SetCenter(x, y);
                list.push_back(fig);
 
         }
+        //debug(std::to_string(list.size()));
+       // for(auto l:list){
+        //    debug(std::string(l));
+        //}
         ArrayofFigures = list;
         return list;
     }
 
     //вторая часть задания - нахождение свободной площади мишени
-    float _area = -1;
+
     //функция для определения площади методом монте карло
-    float FreeAreaofTarget()
+    float FreeAreaofTarget(int count)
     {
+        if(count == 0)
+            return area;
         int CountFree = 0;
         int CountnotFree = 0;
-        for (int i = 0; i < 3000; i++)
+        for (int i = 0; i < count; i++)
         {
             bool ss = false;
             auto p = Point::GeneratePoint(new Point(xLeftTop, yLeftTop), new Point(xLeftTop + widht, yLeftTop + height), r);
-            for (auto fig: ArrayofFigures){
-                if(fig.InTarget(p->x, p->y)){
+            for (Figures * fig : ArrayofFigures){
+                if(fig->InTarget(p->x, p->y)){
                     ss =true;
                     break;
                 }
@@ -108,8 +124,8 @@ public:
                 CountFree++;
             }
         }
-        _area = CountnotFree / 3000.0;
-        return _area;
+        area = (float)CountnotFree / (float)count;
+        return area;
     }
 };
 

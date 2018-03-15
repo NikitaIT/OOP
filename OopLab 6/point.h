@@ -16,7 +16,9 @@ public:
 
     static Point *GeneratePoint(Point *min, Point*max, Random &r)
     {
-        return new Point((float)r.NextDouble() * (max->x - min->x) + min->x, (float)r.NextDouble() * (max->y - min->y) + min->y);
+        auto f = (float)r.NextDouble();
+        auto f2 = f * (max->x - min->x);
+        return new Point( f2 + min->x, (float)r.NextDouble() * (max->y - min->y) + min->y);
     }
 };
 

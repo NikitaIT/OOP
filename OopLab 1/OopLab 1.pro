@@ -19,3 +19,6 @@ HEADERS  += mainwindow.h \
     polynom.h
 
 FORMS    += mainwindow.ui
+
+RESOURCES += \
+    styles.qrc

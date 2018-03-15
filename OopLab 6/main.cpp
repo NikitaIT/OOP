@@ -2,14 +2,6 @@
 #include <QApplication>
 #include "target.h"
 #include <iostream>
-class Form
-{
-public:
-
-    Form() {
-
-    }
-};
 
 
 int main(int argc, char *argv[])

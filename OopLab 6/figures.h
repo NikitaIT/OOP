@@ -1,7 +1,8 @@
 #ifndef FIGURES_H
 #define FIGURES_H
 #include <cmath>
-
+#include <string>
+#include <sstream>
 class Figures
 {
 public:
@@ -12,8 +13,12 @@ public:
 
      float area = 0;
     Figures(){}
-    virtual  bool InTarget(float x, float y){return true;}
-    virtual  void SetCenter(float x, float y){}
+    virtual  bool InTarget(float x, float y)= 0;
+    virtual  void SetCenter(float x, float y) = 0;
+    operator std::string() const {
+        std::ostringstream buff;
+        buff<< "area "<< area<<" widht"  <<widht<<" height"<<height <<" xLeftTop " <<xLeftTop<< " yLeftTop " << yLeftTop;
+        return buff.str(); }
 };
 
 class Rectangle : public Figures
@@ -28,13 +33,13 @@ public:
         widht = w;
     }
 
-    void SetCenter(float x, float y) override
+    void SetCenter(float x, float y)
     {
         xLeftTop = x - widht / 2;
         yLeftTop = y - height / 2;
     }
 
-    bool InTarget(float x0, float y0) override
+    bool InTarget(float x0, float y0)
     {
         return ((xLeftTop + widht) >= x0 && x0 >= xLeftTop) && ((yLeftTop + height) >= y0 && y0 >= yLeftTop);
     }
@@ -50,13 +55,13 @@ public:
         widht = w;
         height = h;
     }
-    void SetCenter(float x, float y) override
+    void SetCenter(float x, float y)
     {
         xLeftTop = x - widht / 2;
         yLeftTop = y - height / 2;
     }
 
-    bool InTarget(float x, float y)override
+    bool InTarget(float x, float y)
     {
         return std::pow(x / widht, 2) + std::pow(y / height, 2) <= 1;
     }
