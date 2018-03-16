@@ -7,8 +7,8 @@
 #include <fstream>
 #include <string>
 
-struct BadFileError{
-    BadFileError(std::string errMsg){
+struct IOException{
+    IOException(std::string errMsg){
         std::cerr << "\n\n" << errMsg << "\n\n";
     }
 };

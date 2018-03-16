@@ -7,10 +7,10 @@
 #include <QPainter>
 #include <QDebug>
 
-static const QColor colours[10] = {QColor("cyan"), QColor("magenta"), QColor("red"),
-                                       QColor("darkRed"), QColor("darkCyan"), QColor("darkMagenta"),
-                                       QColor("green"), QColor("darkGreen"), QColor("yellow"),
-                                       QColor("blue")};
+static const QColor colours[10] = {QColor(255, 0, 0, 127), QColor("darkCyan"), QColor(0, 0, 255, 127), QColor("red"),
+                                       QColor("darkRed"), QColor(0, 222, 255, 127),
+                                       QColor(123, 43, 4, 222), QColor(23, 22, 255, 41), QColor(0, 122, 255, 127),
+                                       QColor(123, 51, 255, 127)};
 
 Node::Node(int radius, int id):
 radius_(radius), id_(id), color_(colours[id % 10]), colorOwner(this)

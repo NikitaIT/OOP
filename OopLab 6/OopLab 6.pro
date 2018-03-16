@@ -17,13 +17,15 @@ SOURCES += main.cpp\
     target.cpp \
     point.cpp \
     figures.cpp \
-    random.cpp
+    random.cpp \
+    calc.cpp
 
 HEADERS  += mainwindow.h \
     target.h \
     point.h \
     figures.h \
-    random.h
+    random.h \
+    calc.h
 
 FORMS    += mainwindow.ui
 

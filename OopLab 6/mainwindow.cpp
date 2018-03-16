@@ -5,22 +5,6 @@
 #include <sstream>
 #include <memory>
 
-class Calc{
-public:
-    struct config{
-        float widht;
-        float height;
-        int figuresCount;
-        int iterationCount;
-    };
-    static double CalculateArea(config c){
-        auto t = new Target(1000, 1000, c.widht, c.height);
-        t->GenerateFigures(c.figuresCount);
-        t->FreeAreaofTarget(c.iterationCount);
-        return t->area;
-    }
-};
-
 
 
 
@@ -29,28 +13,44 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
-    //Target *t = new Target(85.0f, 85.0f, 200.0f, 200.0f);
-   // t->GenerateFigures(0);
-    //t->FreeAreaofTarget();
-
+    calc = new Calc();
 }
 
 MainWindow::~MainWindow()
 {
+    delete calc;
     delete ui;
 }
 
 void MainWindow::on_pushButton_2_clicked()
 {
-    Calc::config a;
-    a.widht = (float)ui->sbWidth->value();
-    a.height = (float)ui->sbHight->value();
-    a.figuresCount = ui->sbFiguresCount->value();
-    a.iterationCount = ui->sbRandomScanCount->value();
-    auto area = Calc::CalculateArea(a);
+    Calc::config configuration = calc->GetConf();
+    configuration.widht = (float)ui->sbWidth->value();
+    configuration.height = (float)ui->sbHight->value();
+    configuration.figuresCount = ui->sbFiguresCount->value();
+    this->setResult(configuration);
+}
+
+void MainWindow::on_pushButton_clicked()
+{
+    this->setResult(calc->GetConf());
+}
+
+void MainWindow::setResult(Calc::config configuration)
+{
+    configuration.iterationCount = ui->sbRandomScanCount->value();
+    configuration.regularScanW = ui->sbRegularScanIntervalStart->value();
+    configuration.regularScanH = ui->sbRegularScanIntervalEnd->value();
+    configuration.isRandomScan = ui->cbRandomScanCount->isChecked();
+    configuration.isRegularScan = ui->cbRegularScanInterval->isChecked();
+
+    float area = calc->CalculateArea(configuration);
     std::ostringstream buff;
     buff<< area * 100;buff<<  " % " << "Free Area";
     qDebug(buff.str().c_str());
     ui->statusBar->showMessage(buff.str().c_str());
+    if(area!=0){
+        ui->lArea->setText( QString::number(calc->CalculateAreaSize(area)/area) );
+    }
+    ui->lFreeArea->setText( QString::number(calc->CalculateAreaSize(area)) );
 }

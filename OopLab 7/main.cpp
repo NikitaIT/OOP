@@ -1,80 +1,35 @@
 #include <iostream>
-#include "figure.h"
-#include "parallelogram.h"
-#include "rhombus.h"
-#include "rectangle.h"
-#include "square.h"
+#include "../OopLab 6/figures.h"
 #include <vector>
-
-enum figNum  {NParallelogram = '1', NRhombus = '2', NRectangle = '3', NSquare = '4'};
-
-Figure* getFigure(int mode){
-    Figure* tmpFigure = NULL;
-    std::cout << "Введите " << ((mode == NSquare) ? "2" : "3") << " координаты вершин (1ая - общая)\n";
-    std::vector<Point> inputCoordinates;
-    double tmpX, tmpY;
-
-    while (1){
-
-        for ( int i = (mode == NSquare) ? 2 : 3; i > 0; --i ){
-            std::cin >> tmpX >> tmpY;
-            inputCoordinates.emplace_back(Point(tmpX, tmpY));
-        }
-
-        try{
-            switch (mode) {
-            case NParallelogram:
-                tmpFigure = new Parallelogram(inputCoordinates[0], inputCoordinates[1], inputCoordinates[2]);
-                break;
-            case NRhombus:
-                tmpFigure = new Rhombus(inputCoordinates[0], inputCoordinates[1], inputCoordinates[2]);
-                break;
-            case NRectangle:
-                tmpFigure = new Rectangle(inputCoordinates[0], inputCoordinates[1], inputCoordinates[2]);
-                break;
-            case NSquare:
-                tmpFigure = new Square(inputCoordinates[0], inputCoordinates[1]);
-                break;
-            default:
-                break;
-            }
-            break;
-        } catch(BadCoordinateException){
-            std::cout << "Ввод не корректен, повторите ввод с правильными координатами: \n";
-            continue;
-        }
-    }
-    return tmpFigure;
-}
-
+#include <typeinfo>
+class Romb: public Parallelogram{
+public:
+    Romb(float h, float angle_) : Parallelogram( h,  h, angle_){}
+};
 int main(){
-    std::vector<Figure*> figures;
-    char cmd;
-    do {
-        cmd = 'n';
-        std::cout << "=============================\n"
-                     "'1' Параллелограмм \n"
-                     "'2' Ромб \n"
-                     "'3' Прямоугольник\n"
-                     "'4' Квадрат\n"
-                     "'n'' чтобы выйти\n"
-                     "Введите желаемую команды: \n";
-        std::cin >> cmd;
+    std::vector<std::pair<CAlculateble*,std::string>> figures;
+    float a1,a2,a3;
+    std::cout<< "Enter Input Parametrs"<< std::endl;
+    std::cout<< "1. side1 = ";
+    std::cin>>a1;
+    std::cout<< std::endl;
+    std::cout<< "2. side2 = ";
+    std::cin>>a2;
+    std::cout<< std::endl;
+    std::cout<< "3. angle = ";
+    std::cin>>a3;
+    std::cout<< std::endl;
 
-        if (cmd != 'n'){
-            figures.emplace_back(getFigure(cmd));
-        } else{
-            break;
-        }
+    figures.emplace_back(new Parallelogram(a1,a2,a3),"Parallelogram");
+    figures.emplace_back(new Rectangle(0,0,a1,a2),"Rectangle");
+    figures.emplace_back(new Romb(a1,a3),"Romb");
+    figures.emplace_back(new Square(0,0,a1),"Square");
 
-        system("clear");
-        for (auto figure : figures){
-            std::cout << "Площадь фигуры = "   << figure->Area()
-                      << " Периметр фигуры = " << figure->Perimeter() << std::endl;
-        }
-    } while (1);
-
-    for (auto i : figures)
-        delete i;
+    for (std::pair<CAlculateble*,std::string> figure : figures){
+        std::cout <<  figure.second << std::endl
+                   << "Периметр фигуры = " << figure.first->Perimeter()
+                   << " Площадь фигуры = "   << figure.first->Area()
+                   << std::endl;
+    }
     return 0;
 }

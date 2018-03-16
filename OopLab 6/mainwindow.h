@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 
+#include "calc.h"
+
 namespace Ui {
 class MainWindow;
 }
@@ -18,8 +20,11 @@ public:
 private slots:
     void on_pushButton_2_clicked();
 
+    void on_pushButton_clicked();
+    void setResult(Calc::config configuration);
 private:
     Ui::MainWindow *ui;
+    Calc *calc;
 };
 
 #endif // MAINWINDOW_H

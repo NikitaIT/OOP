@@ -25,9 +25,9 @@ void GraphWidget::paintEvent(QPaintEvent *event)
     int numOfNodes = Nodes->getSize();
 
     // Brush setup
-    painter.setPen(QPen(Qt::black, 1, Qt::SolidLine, Qt::FlatCap));
+    painter.setPen(QPen(Qt::black, 2, Qt::SolidLine, Qt::FlatCap));
     double vectorLength = 0;
-    painter.setBrush(QBrush(Qt::white, Qt::SolidPattern));
+    painter.setBrush(QBrush(Qt::gray, Qt::SolidPattern));
 
     QPointF nodePos1, nodePos2;
     //Drawing edges and arrows
@@ -48,14 +48,14 @@ void GraphWidget::paintEvent(QPaintEvent *event)
                 vectorLength = sqrt(nodePos2.x() * nodePos2.x() + nodePos2.y() * nodePos2.y());
 
                 //Scale vector for radius exclusion
-                nodePos2.setX(nodePos2.x() * (vectorLength - radius) / vectorLength);
-                nodePos2.setY(nodePos2.y() * (vectorLength - radius) / vectorLength);
+                nodePos2.setX(nodePos2.x() * (vectorLength - radius/ 2) / vectorLength);
+                nodePos2.setY(nodePos2.y() * (vectorLength - radius/ 2) / vectorLength);
                 //Move to old coordinate position
                 nodePos2.setX(nodePos2.x() + nodePos1.x());
                 nodePos2.setY(nodePos2.y() + nodePos1.y());
                 //Draw ellips arrow (lol)
-                painter.drawEllipse(nodePos2, radius / 4, radius / 4);
-                painter.setBrush(QBrush(Qt::white, Qt::SolidPattern));
+                painter.drawEllipse(nodePos2, radius / 6, radius / 6);
+                painter.setBrush(QBrush(Qt::gray, Qt::SolidPattern));
             }
         }
     }
@@ -66,10 +66,10 @@ void GraphWidget::paintEvent(QPaintEvent *event)
         tmpPosition = Nodes->getPosition(i);
         if (!tmpPosition.isNull()){
             if (!Nodes->isConnected(i, i))
-                painter.setBrush(QBrush(Qt::white, Qt::SolidPattern));
+                painter.setBrush(QBrush(Qt::gray, Qt::SolidPattern));
             else
                 painter.setBrush(QBrush(Qt::yellow, Qt::SolidPattern));
-            painter.drawEllipse(tmpPosition, radius, radius);
+            painter.drawEllipse(tmpPosition, radius/ 2, radius/ 2);
             painter.drawText(tmpPosition, QString::number(i));
         }
     }
@@ -79,7 +79,7 @@ void GraphWidget::openFile(QString filename)
 {
     try {
         Nodes = std::make_unique<NodesListFromFile>(filename.toStdString(), this->size().width(), this->size().height());
-    } catch (BadFileError) {
+    } catch (IOException) {
         emit cantReadFileWithMatrix();
         return;
     }

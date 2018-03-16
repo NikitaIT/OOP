@@ -3,7 +3,14 @@
 #include <cmath>
 #include <string>
 #include <sstream>
-class Figures
+
+class CAlculateble{
+public:
+     virtual double Area() const {return 0;}
+     virtual double Perimeter() const {return 0;}
+};
+
+class Figures : public CAlculateble
 {
 public:
     float widht;
@@ -13,8 +20,9 @@ public:
 
      float area = 0;
     Figures(){}
-    virtual  bool InTarget(float x, float y)= 0;
-    virtual  void SetCenter(float x, float y) = 0;
+    virtual ~Figures(){}
+    virtual  bool InTarget(float x, float y){return 0;}
+    virtual  void SetCenter(float x, float y) {}
     operator std::string() const {
         std::ostringstream buff;
         buff<< "area "<< area<<" widht"  <<widht<<" height"<<height <<" xLeftTop " <<xLeftTop<< " yLeftTop " << yLeftTop;
@@ -42,6 +50,15 @@ public:
     bool InTarget(float x0, float y0)
     {
         return ((xLeftTop + widht) >= x0 && x0 >= xLeftTop) && ((yLeftTop + height) >= y0 && y0 >= yLeftTop);
+    }
+    double Area() const
+    {
+        return widht * height;
+    }
+
+    double Perimeter() const
+    {
+        return 2 * (widht + height);
     }
 };
 
@@ -77,6 +94,7 @@ public:
         yLeftTop = y;
         height = widht = a;
     }
+
 };
 
 class Circle : public Ellipse
@@ -88,6 +106,25 @@ public:
         xLeftTop = x;
         yLeftTop = y;
         height = widht = R;
+    }
+};
+class Parallelogram : public Rectangle
+{
+    public:
+    float angle;
+    Parallelogram(float h, float w, float angle_){
+        angle=(angle_);
+        widht=(w);
+        height=(h);
+    }
+    double Area() const
+    {
+        return widht * height * std::sin(angle * 3.14 / 180);
+    }
+
+    double Perimeter() const
+    {
+        return 2 * (widht + height);
     }
 };
 
