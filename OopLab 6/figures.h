@@ -21,8 +21,8 @@ public:
      float area = 0;
     Figures(){}
     virtual ~Figures(){}
-    virtual  bool InTarget(float x, float y){return 0;}
-    virtual  void SetCenter(float x, float y) {}
+    virtual  bool InTarget(float x, float y) = 0;
+    virtual  void SetCenter(float x, float y) = 0;
     operator std::string() const {
         std::ostringstream buff;
         buff<< "area "<< area<<" widht"  <<widht<<" height"<<height <<" xLeftTop " <<xLeftTop<< " yLeftTop " << yLeftTop;

@@ -1,13 +1,14 @@
 TEMPLATE = subdirs
 
-SUBDIRS += 'OopLab 1'\
-            'OopLab 2'\
-            'OopLab 3'\
-            'OopLab 4'\
-            'OopLab 5'\
-            'OopLab 6'\
-            'OopLab 7'\
-            'OopLab 8'
+SUBDIRS += 'OopLab 5'\
+            'OopLab 7'
+           # 'OopLab 1'\
+           # 'OopLab 2'\
+           #  'OopLab 3'\
+           #  'OopLab 4'\
+           #  'OopLab 6'\
+
+           #  'OopLab 8'
 
 HEADERS += \
     Shared/matrix.h \
