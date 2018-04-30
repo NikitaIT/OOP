@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/new/models">
+        <file>GasStation.png</file>
+        <file>BoxOffice.svg</file>
+        <file>men-1.png</file>
+        <file>church-filled.png</file>
+    </qresource>
+</RCC>

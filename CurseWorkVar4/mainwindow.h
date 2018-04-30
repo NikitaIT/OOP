@@ -2,10 +2,9 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "graphwidget.h"
-#include <QFileDialog>
-#include <QErrorMessage>
-
+#include <QtGui>
+#include "live.h"
+#include <QMessageBox>
 namespace Ui {
 class MainWindow;
 }
@@ -17,13 +16,19 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-signals:
-    void fileOpened(QString filename);
-private slots:
-    void openFile();
-    void reopenFile();
+
 private:
     Ui::MainWindow *ui;
+    Live *live;
+
+private slots:
+    void OnStart();
+    void OnStop();
+    void OnReStart();
+    void OnStateChange();
+    void OnStatistic();
+
+
 };
 
 #endif // MAINWINDOW_H
